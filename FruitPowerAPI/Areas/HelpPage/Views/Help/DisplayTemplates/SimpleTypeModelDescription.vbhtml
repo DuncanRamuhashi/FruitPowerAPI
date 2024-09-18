@@ -1,3 +1,0 @@
-@Imports FruitPowerAPI.Areas.HelpPage.ModelDescriptions
-@ModelType SimpleTypeModelDescription
-@Model.Documentation
