@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FruitPowerAPI.Models;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,31 +11,87 @@ namespace FruitPowerAPI.Controllers
 {
     public class LoginController : ApiController
     {
-        // GET api/<controller>
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+
 
         // GET api/<controller>/5
-        public string Get(int id)
+        public string Get()
         {
-            return "value";
+           
+            dynamic userInformation = (from u in GlobalData.powerFruitData.ByoUsers
+                                 select u);
+
+            if (userInformation != null)
+            {         
+                    return JsonConvert.SerializeObject(userInformation);      
+            }
+            else
+            {
+                return JsonConvert.SerializeObject(false);
+            }
         }
 
+
         // POST api/<controller>
-        public void Post([FromBody] string value)
+        public string Post([FromBody] PowerFruitUser pfUser)
         {
+            if (GlobalData.powerFruitData.ByoUsers.Any(u => u.Email.Equals(pfUser.Email)))
+            {
+                dynamic userInformation = (from u in GlobalData.powerFruitData.ByoUsers
+                                           where u.Email.Equals(pfUser.Email)
+                                           select u).Single();
+                if (userInformation.Password.Equals(pfUser.Password))
+                {
+                    return JsonConvert.SerializeObject(userInformation);
+                }
+                else {
+                    return JsonConvert.SerializeObject(false);
+                }
+            }
+            else {
+                return JsonConvert.SerializeObject(false);
+            }
         }
 
         // PUT api/<controller>/5
-        public void Put(int id, [FromBody] string value)
+        public string Put([FromBody] PowerFruitUser pfUser)
         {
+            if (GlobalData.powerFruitData.ByoUsers.Any(u => u.Id.Equals(pfUser.Id)))
+            {
+         
+
+                ByoUser byoUserUpdate = GlobalData.powerFruitData.ByoUsers.SingleOrDefault(u => u.Id == pfUser.Id);
+                byoUserUpdate.Name = pfUser.Name;
+                byoUserUpdate.Email = pfUser.Email;
+                byoUserUpdate.Password = pfUser.Password;
+                byoUserUpdate.UserType = pfUser.Usertype;
+               
+                GlobalData.powerFruitData.SubmitChanges();
+
+                return JsonConvert.SerializeObject(true);
+            }
+            else
+            {
+
+                return JsonConvert.SerializeObject(false);
+            }
         }
 
         // DELETE api/<controller>/5
-        public void Delete(int id)
+        public string Delete(int id)
         {
+            if (GlobalData.powerFruitData.ByoUsers.Any(u => u.Id.Equals(id)))
+            {
+                dynamic userDelete = (from u in GlobalData.powerFruitData.ByoUsers
+                                      where u.Id.Equals(id)
+                                      select u).Single();
+                GlobalData.powerFruitData.ByoUsers.DeleteOnSubmit(userDelete);
+                GlobalData.powerFruitData.SubmitChanges();
+                return JsonConvert.SerializeObject(true);
+            }
+            else {
+
+                return JsonConvert.SerializeObject(false) ;
+            }
         }
     }
 }

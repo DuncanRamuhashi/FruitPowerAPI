@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FruitPowerAPI.Models;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,31 +11,41 @@ namespace FruitPowerAPI.Controllers
 {
     public class RegisterController : ApiController
     {
-        // GET api/<controller>
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
 
-        // GET api/<controller>/5
-        public string Get(int id)
-        {
-            return "value";
-        }
 
         // POST api/<controller>
-        public void Post([FromBody] string value)
+      
+        public string Post([FromBody] PowerFruitUser pfUser)
         {
+            if (!GlobalData.powerFruitData.ByoUsers.Any(u => u.Email.Equals(pfUser.Email)))
+            {
+                var user = new ByoUser
+                {
+                    Name = pfUser.Name,
+                    Email = pfUser.Email,
+                    Password = pfUser.Password,
+                    UserType = pfUser.Usertype,
+                };
+                try
+                {
+                    GlobalData.powerFruitData.ByoUsers.InsertOnSubmit(user);
+                    GlobalData.powerFruitData.SubmitChanges();
+                    return  JsonConvert.SerializeObject(true);
+                }
+                catch (Exception ex) {
+
+                    ex.GetBaseException();
+                    return JsonConvert.SerializeObject(false); ;
+                }
+
+
+            }
+            else {
+                return JsonConvert.SerializeObject(false);
+            }
+
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody] string value)
-        {
-        }
 
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
     }
 }

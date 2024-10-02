@@ -18,6 +18,9 @@ namespace FruitPowerAPI
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-        }
+            GlobalData.powerFruitData = new DataClasses1DataContext();
+
+         }
+
     }
 }

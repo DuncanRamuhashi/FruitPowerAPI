@@ -21,16 +21,22 @@
         <classShapeMoniker Id="04192549-ef06-428b-a45f-c33ecb284633" />
       </nodes>
     </associationConnector>
-    <classShape Id="4883c342-5c4f-473a-9a72-fe80837c2574" absoluteBounds="0.875, 3.75, 2, 1.3862939453125">
-      <DataClassMoniker Name="/DataClasses1DataContext/Fruit" />
-      <nestedChildShapes>
-        <elementListCompartment Id="a078fbf5-0832-4c4a-861a-2a41fb62f97e" absoluteBounds="0.89000000000000012, 4.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="c8f87169-2b3d-4be0-9f59-41b9ca440b03" absoluteBounds="5.25, 3.375, 2, 1.7708968098958331">
+    <classShape Id="c8f87169-2b3d-4be0-9f59-41b9ca440b03" absoluteBounds="6.875, 3.625, 2, 1.7708968098958331">
       <DataClassMoniker Name="/DataClasses1DataContext/Order" />
       <nestedChildShapes>
-        <elementListCompartment Id="058ee07c-9507-46ef-b5bc-b3a44959fd4e" absoluteBounds="5.265, 3.835, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="058ee07c-9507-46ef-b5bc-b3a44959fd4e" absoluteBounds="6.89, 4.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b653d8d1-f76e-4d03-b6ef-a8aa9c2da853" absoluteBounds="3.625, 3.25, 2, 1.9631982421875">
+      <DataClassMoniker Name="/DataClasses1DataContext/Issue" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ad8ba254-1a49-4fa6-be3c-aaf3e2515267" absoluteBounds="3.6399999999999997, 3.71, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9d7f12cf-4e38-4ff8-a0fb-c3c3f5029d96" absoluteBounds="0.5, 3.125, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/DataClasses1DataContext/Fruit" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1c75387d-7f96-4c5a-b755-fb671ea80fad" absoluteBounds="0.51500000000000012, 3.585, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>
