@@ -14,20 +14,20 @@ namespace FruitPowerAPI.Controllers
 
 
         // GET api/<controller>/5
-        public string Get()
+        public object[] Get()
         {
-            dynamic info = (from i in GlobalData.powerFruitData.Issues
-                                       select i);
+            var issues = GlobalData.powerFruitData.Issues.ToArray();
 
-            if (info != null)
+            if (issues != null && issues.Length > 0)
             {
-                return JsonConvert.SerializeObject(info);
+                return issues;
             }
             else
             {
-                return JsonConvert.SerializeObject(false);
+                return new Issue[0]; // Return an empty array if no issues are found
             }
         }
+
 
         // POST api/<controller>
         public string Post([FromBody] PowerFruitIssue i)

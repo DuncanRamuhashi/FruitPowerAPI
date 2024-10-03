@@ -12,20 +12,21 @@ namespace FruitPowerAPI.Controllers
     public class OrderController : ApiController
     {
         // GET api/<controller>
-        public string Get()
+        public object[] Get()
         {
-            dynamic orderInformation = (from o in GlobalData.powerFruitData.Orders
-                                       select o);
+            var orderInformation = (from o in GlobalData.powerFruitData.Orders
+                                    select o).ToArray(); // Convert to an array
 
-            if (orderInformation != null)
+            if (orderInformation != null && orderInformation.Length > 0)
             {
-                return JsonConvert.SerializeObject(orderInformation);
+                return orderInformation; // Return the order information array
             }
             else
             {
-                return JsonConvert.SerializeObject(false);
+                return new object[] { false }; // Return an array with false
             }
         }
+
 
         // GET api/<controller>/5
         public string Get(int id)

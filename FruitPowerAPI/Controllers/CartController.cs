@@ -14,19 +14,19 @@ namespace FruitPowerAPI.Controllers
         // GET api/<controller>
 
         // GET api/<controller>/5
-        public string Get(int id)
+        public object Get(int id)
         {
-            dynamic fruitCart = (from f in GlobalData.powerFruitData.Fruits
-                                        where f.Id.Equals(id)
-                                        select f);
+            var fruitCart = (from f in GlobalData.powerFruitData.Fruits
+                             where f.Id.Equals(id)
+                             select f).FirstOrDefault();
 
             if (fruitCart != null)
             {
-                return JsonConvert.SerializeObject(fruitCart);
+                return fruitCart; // Return the fruit object directly
             }
             else
             {
-                return JsonConvert.SerializeObject(false);
+                return false; // Return false if not found
             }
         }
 

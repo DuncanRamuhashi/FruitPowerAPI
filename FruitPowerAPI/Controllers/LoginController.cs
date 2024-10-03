@@ -14,21 +14,21 @@ namespace FruitPowerAPI.Controllers
 
 
         // GET api/<controller>/5
-        public string Get()
+        public object[] Get()
         {
-           
-            dynamic userInformation = (from u in GlobalData.powerFruitData.ByoUsers
-                                 select u);
+            var userInformation = (from u in GlobalData.powerFruitData.ByoUsers
+                                   select u).ToArray(); // Convert to an array
 
-            if (userInformation != null)
-            {         
-                    return JsonConvert.SerializeObject(userInformation);      
+            if (userInformation != null && userInformation.Length > 0)
+            {
+                return userInformation; // Return the user information array
             }
             else
             {
-                return JsonConvert.SerializeObject(false);
+                return new object[] { false }; // Return an array with false
             }
         }
+
 
 
         // POST api/<controller>
